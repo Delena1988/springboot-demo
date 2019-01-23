@@ -1,0 +1,2 @@
+===2018-12-24 11:10:25.358 WARN  com.zaxxer.hikari.util.DriverDataSource Line:-1  - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+===2018-12-24 11:12:32.336 WARN  com.zaxxer.hikari.util.DriverDataSource Line:-1  - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.

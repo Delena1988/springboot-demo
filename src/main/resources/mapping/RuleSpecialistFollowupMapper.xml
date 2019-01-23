@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.joinhealth.mapper.RuleSpecialistFollowupMapper" >
+  <resultMap id="BaseResultMap" type="cn.joinhealth.model.RuleSpecialistFollowup" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="data_type" property="dataType" jdbcType="INTEGER" />
+    <result column="hosp_code" property="hospCode" jdbcType="VARCHAR" />
+    <result column="rule_id" property="ruleId" jdbcType="VARCHAR" />
+    <result column="rule_version" property="ruleVersion" jdbcType="DECIMAL" />
+    <result column="rule_version_desc" property="ruleVersionDesc" jdbcType="VARCHAR" />
+    <result column="rule_title" property="ruleTitle" jdbcType="VARCHAR" />
+    <result column="rule_desc" property="ruleDesc" jdbcType="VARCHAR" />
+    <result column="label_codes" property="labelCodes" jdbcType="VARCHAR" />
+    <result column="label_names" property="labelNames" jdbcType="VARCHAR" />
+    <result column="diag_codes" property="diagCodes" jdbcType="VARCHAR" />
+    <result column="diag_names" property="diagNames" jdbcType="VARCHAR" />
+    <result column="rule_form_id" property="ruleFormId" jdbcType="VARCHAR" />
+    <result column="rule_education_id" property="ruleEducationId" jdbcType="VARCHAR" />
+    <result column="editor_id" property="editorId" jdbcType="VARCHAR" />
+    <result column="editor_name" property="editorName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.joinhealth.model.RuleSpecialistFollowup" extends="BaseResultMap" >
+    <result column="rule_json" property="ruleJson" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_type, hosp_code, rule_id, rule_version, rule_version_desc, rule_title, rule_desc, 
+    label_codes, label_names, diag_codes, diag_names, rule_form_id, rule_education_id, 
+    editor_id, editor_name, create_time, update_time, is_delete
+  </sql>
+  <sql id="Blob_Column_List" >
+    rule_json
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from rule_specialist_followup
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rule_specialist_followup
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.joinhealth.model.RuleSpecialistFollowup" >
+    insert into rule_specialist_followup (id, data_type, hosp_code, 
+      rule_id, rule_version, rule_version_desc, 
+      rule_title, rule_desc, label_codes, 
+      label_names, diag_codes, diag_names, 
+      rule_form_id, rule_education_id, editor_id, 
+      editor_name, create_time, update_time, 
+      is_delete, rule_json)
+    values (#{id,jdbcType=VARCHAR}, #{dataType,jdbcType=INTEGER}, #{hospCode,jdbcType=VARCHAR}, 
+      #{ruleId,jdbcType=VARCHAR}, #{ruleVersion,jdbcType=DECIMAL}, #{ruleVersionDesc,jdbcType=VARCHAR}, 
+      #{ruleTitle,jdbcType=VARCHAR}, #{ruleDesc,jdbcType=VARCHAR}, #{labelCodes,jdbcType=VARCHAR}, 
+      #{labelNames,jdbcType=VARCHAR}, #{diagCodes,jdbcType=VARCHAR}, #{diagNames,jdbcType=VARCHAR}, 
+      #{ruleFormId,jdbcType=VARCHAR}, #{ruleEducationId,jdbcType=VARCHAR}, #{editorId,jdbcType=VARCHAR}, 
+      #{editorName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER}, #{ruleJson,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.joinhealth.model.RuleSpecialistFollowup" >
+    insert into rule_specialist_followup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataType != null" >
+        data_type,
+      </if>
+      <if test="hospCode != null" >
+        hosp_code,
+      </if>
+      <if test="ruleId != null" >
+        rule_id,
+      </if>
+      <if test="ruleVersion != null" >
+        rule_version,
+      </if>
+      <if test="ruleVersionDesc != null" >
+        rule_version_desc,
+      </if>
+      <if test="ruleTitle != null" >
+        rule_title,
+      </if>
+      <if test="ruleDesc != null" >
+        rule_desc,
+      </if>
+      <if test="labelCodes != null" >
+        label_codes,
+      </if>
+      <if test="labelNames != null" >
+        label_names,
+      </if>
+      <if test="diagCodes != null" >
+        diag_codes,
+      </if>
+      <if test="diagNames != null" >
+        diag_names,
+      </if>
+      <if test="ruleFormId != null" >
+        rule_form_id,
+      </if>
+      <if test="ruleEducationId != null" >
+        rule_education_id,
+      </if>
+      <if test="editorId != null" >
+        editor_id,
+      </if>
+      <if test="editorName != null" >
+        editor_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="ruleJson != null" >
+        rule_json,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="hospCode != null" >
+        #{hospCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleId != null" >
+        #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleVersion != null" >
+        #{ruleVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="ruleVersionDesc != null" >
+        #{ruleVersionDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleTitle != null" >
+        #{ruleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleDesc != null" >
+        #{ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="labelCodes != null" >
+        #{labelCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="labelNames != null" >
+        #{labelNames,jdbcType=VARCHAR},
+      </if>
+      <if test="diagCodes != null" >
+        #{diagCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="diagNames != null" >
+        #{diagNames,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleFormId != null" >
+        #{ruleFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleEducationId != null" >
+        #{ruleEducationId,jdbcType=VARCHAR},
+      </if>
+      <if test="editorId != null" >
+        #{editorId,jdbcType=VARCHAR},
+      </if>
+      <if test="editorName != null" >
+        #{editorName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="ruleJson != null" >
+        #{ruleJson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.joinhealth.model.RuleSpecialistFollowup" >
+    update rule_specialist_followup
+    <set >
+      <if test="dataType != null" >
+        data_type = #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="hospCode != null" >
+        hosp_code = #{hospCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleId != null" >
+        rule_id = #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleVersion != null" >
+        rule_version = #{ruleVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="ruleVersionDesc != null" >
+        rule_version_desc = #{ruleVersionDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleTitle != null" >
+        rule_title = #{ruleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleDesc != null" >
+        rule_desc = #{ruleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="labelCodes != null" >
+        label_codes = #{labelCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="labelNames != null" >
+        label_names = #{labelNames,jdbcType=VARCHAR},
+      </if>
+      <if test="diagCodes != null" >
+        diag_codes = #{diagCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="diagNames != null" >
+        diag_names = #{diagNames,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleFormId != null" >
+        rule_form_id = #{ruleFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleEducationId != null" >
+        rule_education_id = #{ruleEducationId,jdbcType=VARCHAR},
+      </if>
+      <if test="editorId != null" >
+        editor_id = #{editorId,jdbcType=VARCHAR},
+      </if>
+      <if test="editorName != null" >
+        editor_name = #{editorName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="ruleJson != null" >
+        rule_json = #{ruleJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.joinhealth.model.RuleSpecialistFollowup" >
+    update rule_specialist_followup
+    set data_type = #{dataType,jdbcType=INTEGER},
+      hosp_code = #{hospCode,jdbcType=VARCHAR},
+      rule_id = #{ruleId,jdbcType=VARCHAR},
+      rule_version = #{ruleVersion,jdbcType=DECIMAL},
+      rule_version_desc = #{ruleVersionDesc,jdbcType=VARCHAR},
+      rule_title = #{ruleTitle,jdbcType=VARCHAR},
+      rule_desc = #{ruleDesc,jdbcType=VARCHAR},
+      label_codes = #{labelCodes,jdbcType=VARCHAR},
+      label_names = #{labelNames,jdbcType=VARCHAR},
+      diag_codes = #{diagCodes,jdbcType=VARCHAR},
+      diag_names = #{diagNames,jdbcType=VARCHAR},
+      rule_form_id = #{ruleFormId,jdbcType=VARCHAR},
+      rule_education_id = #{ruleEducationId,jdbcType=VARCHAR},
+      editor_id = #{editorId,jdbcType=VARCHAR},
+      editor_name = #{editorName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      rule_json = #{ruleJson,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.joinhealth.model.RuleSpecialistFollowup" >
+    update rule_specialist_followup
+    set data_type = #{dataType,jdbcType=INTEGER},
+      hosp_code = #{hospCode,jdbcType=VARCHAR},
+      rule_id = #{ruleId,jdbcType=VARCHAR},
+      rule_version = #{ruleVersion,jdbcType=DECIMAL},
+      rule_version_desc = #{ruleVersionDesc,jdbcType=VARCHAR},
+      rule_title = #{ruleTitle,jdbcType=VARCHAR},
+      rule_desc = #{ruleDesc,jdbcType=VARCHAR},
+      label_codes = #{labelCodes,jdbcType=VARCHAR},
+      label_names = #{labelNames,jdbcType=VARCHAR},
+      diag_codes = #{diagCodes,jdbcType=VARCHAR},
+      diag_names = #{diagNames,jdbcType=VARCHAR},
+      rule_form_id = #{ruleFormId,jdbcType=VARCHAR},
+      rule_education_id = #{ruleEducationId,jdbcType=VARCHAR},
+      editor_id = #{editorId,jdbcType=VARCHAR},
+      editor_name = #{editorName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

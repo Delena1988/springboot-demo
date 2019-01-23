@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.joinhealth.mapper.DictionaryMedicalMapper" >
+  <resultMap id="BaseResultMap" type="cn.joinhealth.model.DictionaryMedical" >
+    <result column="dictionary_type" property="dictionaryType" jdbcType="TINYINT" />
+    <result column="dictionary_code" property="dictionaryCode" jdbcType="VARCHAR" />
+    <result column="dictionary_name" property="dictionaryName" jdbcType="VARCHAR" />
+    <result column="pinyin_code" property="pinyinCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.joinhealth.model.DictionaryMedical" >
+    insert into dictionary_medical (dictionary_type, dictionary_code, dictionary_name, 
+      pinyin_code)
+    values (#{dictionaryType,jdbcType=TINYINT}, #{dictionaryCode,jdbcType=VARCHAR}, #{dictionaryName,jdbcType=VARCHAR}, 
+      #{pinyinCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.joinhealth.model.DictionaryMedical" >
+    insert into dictionary_medical
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictionaryType != null" >
+        dictionary_type,
+      </if>
+      <if test="dictionaryCode != null" >
+        dictionary_code,
+      </if>
+      <if test="dictionaryName != null" >
+        dictionary_name,
+      </if>
+      <if test="pinyinCode != null" >
+        pinyin_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictionaryType != null" >
+        #{dictionaryType,jdbcType=TINYINT},
+      </if>
+      <if test="dictionaryCode != null" >
+        #{dictionaryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryName != null" >
+        #{dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinCode != null" >
+        #{pinyinCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

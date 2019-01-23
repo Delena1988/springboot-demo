@@ -1,0 +1,97 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /springboot
+
+spring:
+  datasource:
+    druid:
+      name: test
+      #206
+      url: jdbc:mysql://192.168.3.206:3306/springboot?useUnicode=true&characterEncoding=UTF-8
+      username: joinhealth
+      password: 123456
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+  #redis
+  redis:
+    database: 8
+    host: 192.168.3.206
+    port: 6379
+    password: jh123456
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1ms
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+    timeout: 10s
+  #liquibase
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+    check-change-log-location: false
+    enabled: true
+  #取消模板文件缓存
+  thymeleaf:
+      cache: false
+      prefix: classpath:/static/
+  #dubbo
+  dubbo:
+    application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
+      name: Consumer
+    registry:                 #注册中心配置，用于配置连接注册中心相关信息。
+      address: zookeeper://192.168.3.206:2181
+    protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
+      name: dubbo
+      port: 20880
+    #服务暴露与发现消费所在的package
+    scan: cn.joinhealth.hug.model.api.health
+  #kafka
+  kafka:
+    bootstrap-servers: 192.168.3.206:9002
+    consumer:
+      group-id: mygroup
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:ehcache.xml
+servlet:
+  #设置上传文件的大小限制
+  multipart:
+        max-file-size: 10MB
+        max-request-size: 10MB
+## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
+mybatis:
+  mapper-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: cn.joinhealth.model  # 注意：对应实体类的路径
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=
+#引入log4j2配置文件
+#logging:
+#  config: classpath:log4j2.yml
+#自定义参数
+userName: LinJian
+bookTitle: Spring Boot入门教程
+
